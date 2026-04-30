@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const connectDB = require('./src/db/db');
 const {registerRoute , loginRoute} = require('./src/routes/auth.route');
+const { addProduct, getAllProducts } = require('./src/routes/product.route');
 dotenv.config();
 
 
@@ -25,6 +26,10 @@ app.get('/health', (req, res) => {
 // auth routes
 app.use('/api/auth', registerRoute );
 app.use('/api/auth', loginRoute );
+
+// product routes
+app.use('/api/products', addProduct);
+app.use('/api/products', getAllProducts);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT,() =>{
